@@ -15,7 +15,7 @@ import ProductDetail from "./pages/ProductDetail.jsx";
 import Home from "./pages/Home.jsx";
 import { useState, useEffect, useRef } from "react";
 import ShopCart from "./components/ShopCart.jsx";
-// import Checkout from "./pages/Checkout.jsx";
+import Checkout from "./pages/Checkout.jsx";
 import Seller from "./pages/Seller.jsx";
 import Feedbackdashboard from "./pages/Feedbackdashboard.jsx";
 import UsersManagement from "./pages/UsersManagement.jsx";
@@ -338,8 +338,8 @@ function App() {
       >
         <nav class="" data-bs-theme="white" ref={dropdownRef}>
           <Router>
-            {/* <ul className="Navbar-link   d-flex"> */}
-              <ul className="Navbar-link bg-primary d-flex">
+            <ul className="Navbar-link   d-flex">
+              {/* <ul className="Navbar-link bg-primary d-flex"> */}
 
               <li>
                 <Link to="/registration" className="fw-bolder">
@@ -696,7 +696,7 @@ function App() {
               <Route path="/seller" element={<Seller />} />
               <Route path="/feedbackdashboard" element={<Feedbackdashboard />} />
               <Route path="/usersmanagement" element={<UsersManagement />} />
-              {/* <Route path="/checkout" element={<Checkout    checkoutdata={state.cart}/>} /> */}
+              <Route path="/checkout" element={<Checkout    checkoutdata={state.cart}/>} />
               {/* <Route path="/checkout" element={<Checkout />} /> */}
               <Route
                 // exact
