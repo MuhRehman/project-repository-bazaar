@@ -11,13 +11,15 @@ export default function ProductDetail() {
     const { id } = useParams();
     const [userid, setuserId] = useState("");
     const [userfeedback, setfeedback] = useState("");
+    const [usernamefeedback, setUsernamefeedback] = useState("");
     const [userratings, setrating] = useState("");
+    const [ProductId, setProductId] = useState("");
     const [products, setProducts] = useState([]);
     const [feedbackDetail, setfeedbackDetail] = useState([]);
     const [eror, setError] = useState("");
     const [feedbackDatetime, setfeedbackDatetime] = useState("");
     
-    // console.log(id,"ID  test");
+    console.log(id,"ID  test");
 
     // const {id}= useParams()
     
@@ -30,24 +32,25 @@ export default function ProductDetail() {
     useEffect(() => {
       
         fetchProducts();
-        // fetch("http://localhost/backend/productdata.php")
-        // .then((data) => data.json())
-        // .then((data) => {
+        fetch("http://localhost/backend/productdata.php")
+        .then((data) => data.json())
+        .then((data) => {
         //   // alert("Fatch call..");
         //   // console.log(data[0]);
-        //   setProducts(data[0]);          
-        // });
-        let newDate = new Date();
+          setProducts(data[0]);          
+        });
+        // let newDate = new Date();
 
-        let date = newDate.getDate();
-        let month = newDate.getMonth();
-        let getCurrentDateandTimes = month.toLocaleString() + Date().toLocaleString();
-        setuserId("1");
-        setrating("4");
-        setfeedbackDatetime(getCurrentDateandTimes);
+        // let date = newDate.getDate();
+        // let month = newDate.getMonth();
+        // let getCurrentDateandTimes = month.toLocaleString() + Date().toLocaleString();
+        // setuserId("1");
+        // setrating("4");
+        // setfeedbackDatetime(getCurrentDateandTimes);
 
 
-        SubmitProductsFeedBack();
+        // SubmitProductsFeedBack();
+        setProductId(id);
         fetchProductsFeedbackDetail();
           
  
@@ -60,6 +63,13 @@ export default function ProductDetail() {
         switch(type){
          
             
+            case "productfeedbackNameUser":
+                setError("");
+                setUsernamefeedback(e.target.value);
+                if(e.target.value === ""){
+                    setError("product feedback NameUser has left blank!");
+                }
+                break;
             case "productfeedback":
                 setError("");
                 setfeedback(e.target.value);
@@ -110,7 +120,7 @@ export default function ProductDetail() {
         // setSpinner(true);
         // setfeedbackDatetime(); 
         if(userfeedback !== "" ){
-              alert("handleSubmit");
+            //   alert("handleSubmit");
               
               var url = "http://localhost/backend/insertfeedback.php";
             
@@ -121,13 +131,14 @@ export default function ProductDetail() {
               };
 
               var Data = {
-                  userid: userid,
+                  userid: ProductId,
+                  usernamefeedback: usernamefeedback,
                   userfeedback: userfeedback,
                   userratings: userratings,
-                  feedbackDatetime: feedbackDatetime
+                //   feedbackDatetime: feedbackDatetime
               }
               
-              console.log(' Feedback Data ---- ',Data);
+            //   console.log(' Feedback Data ---- ',Data);
       
   
               fetch(url, {
@@ -142,7 +153,7 @@ export default function ProductDetail() {
                 //   navigate("/login");
                   // debugger
   
-                  console.log("Response Latest: ", response);
+                //   console.log("Response Latest: ", response);
                   // setMsg(response[0].result);
               }).catch((err) =>{
                 // setSpinner(false);
@@ -190,8 +201,8 @@ export default function ProductDetail() {
         .get('http://localhost/backend/feedbackdetail.php')
         .then((res) => {
         //   console.log(res,"Fatch request ID"); 
+        console.log("set feedback Detail --------------------",res.data);
         setfeedbackDetail(res.data);
-        console.log("set feedback Detail",res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -206,11 +217,15 @@ export default function ProductDetail() {
     // setfeedbackDatetime(getCurrentDateandTime);
         }
     //  debugger
+       let selected1 = 3;
 
     // console.log("Products Fatch ",products);
-    let selectedProduct = products.find(x=>x.id== id);
-    let selectedFeedbackDetail = feedbackDetail.find(x=>x.userId== 100);
-    console.log("selectedFeedbackDetail", selectedFeedbackDetail);
+    // console.log("id",id);
+    let selectedProduct = products.find(x=>x.id == id);
+    
+    console.log("feedbackDetail-----------444-", feedbackDetail);
+    let selectedFeedbackDetail  = feedbackDetail.find(x=>x.userId == id);
+    console.log("selectedFeedbackDetail----1wwwwww-", selectedFeedbackDetail);
     
     // ?.map(sn => (
     
@@ -242,90 +257,7 @@ export default function ProductDetail() {
 }
 
 
-{/* -----------------testing------------- */}
 
-<>
-<div>
-    <h1>1{userid?userid :""}   </h1>
-    <h1>2{userfeedback?userfeedback :""}</h1>
-    <h1>3{userratings?userratings :""}</h1>
-    <h1>4{feedbackDatetime?feedbackDatetime :""}</h1>
-</div></>
-<form class="container">
-    <div className="rows">
-
-  <h1 class="heading">Give feedback</h1>
-  <div class="rate">
-    <input type="radio" id="star5"  onChange={(e) => handleInputChange(e, "rate")} name="rate" value="5" />
-    <label for="star5" title="text">5 stars</label>
-    <input type="radio" id="star4" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="4" />
-    <label for="star4" title="text">4 stars</label>
-    <input type="radio" id="star3" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="3" />
-    <label for="star3" title="text">3 stars</label>
-    <input type="radio" id="star2" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="2" />
-    <label for="star2" title="text">2 stars</label>
-    <input type="radio" id="star1" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="1" />
-    <label for="star1" title="text">1 star</label>
-  </div>
-
-    </div>
-  
-  <div>
-    ..
-  </div>
-  <div>
-    ...
-  </div>
-
-  {/* <p class="para">What do you think of the issue with this pr?</p> */}
-
-  {/* <div class="feedback-level">
-    <div class="level">
-      <i class="lar la-sad-tear"></i>
-    </div>
-    <div class="level">
-      <i class="las la-frown"></i>
-    </div>
-    <div class="level">
-      <i class="lar la-meh"></i>
-    </div>
-    <div class="level">
-      <i class="lar la-smile"></i>
-    </div>
-    <div class="level">
-      <i class="lar la-grin"></i>
-    </div>
-  </div> */}
-
-
-<div className="float-clears">
-
-</div>
-
-  <div class="feedback-msg">
-    <p class="para">
-      What are the main reasons for your rating?
-    </p>
-    {userfeedback}
-    <textarea     
-       type="text"
-       name="productfeedback"
-       className="form-control form-control-lg"
-       value={userfeedback}
-       onChange={(e) => handleInputChange(e, "productfeedback")}
-    ></textarea>
-  </div>
-
-  
-
-  <div class="buttons">
-    <a href="javascript:alert('Thanks for submiting your feedback')" 
-    className='btn btn-primary mt-3 text-white'
-    onClick={handleSubmit}>Submit</a>
-
-  </div>
-</form>
-{/* -----------------testing------------- */}
 
     
 {/* 
@@ -344,7 +276,7 @@ export default function ProductDetail() {
                 {/* <img class="img-fluid" src={`http://localhost/backend/upload/${selectedProduct.pimg}`} alt="ProductS" /> */}
                     
                     <img class="img-fluid" src="https://placehold.co/600x400" alt="ProductS" />
-                    <div class="row my-3 previews">
+                    {/* <div class="row my-3 previews">
                         <div class="col-md-3">
                             <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
                         </div>
@@ -357,7 +289,7 @@ export default function ProductDetail() {
                         <div class="col-md-3">
                             <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             {selectedProduct? 
@@ -379,20 +311,21 @@ export default function ProductDetail() {
 
 
                     <div class="price-area my-4">
-                        <p class="old-price mb-1"><del>{selectedProduct.pmodel}</del> <span class="old-price-discount text-danger">(20% off)</span></p>
-                        <p class="new-price text-bold mb-1">{selectedProduct.pmodel}</p>
-                        <p class="text-secondary mb-1">(Additional tax may apply on checkout) </p>
+                        {/* <p class="old-price mb-1"><del>{selectedProduct.pmodel}</del> <span class="old-price-discount text-danger">(20% off)</span></p> */}
+                        {/* <p class="old-price mb-1">{selectedProduct.pmodel}</del></p> */}
+                        <p class="new-price text-bold mb-1"><strong>Modal</strong>:  {selectedProduct.pmodel}</p>
+                        {/* <p class="text-secondary mb-1">(Additional tax may apply on checkout) </p> */}
 
                     </div>
 
 
                     <div class="buttons d-flex my-5">
-                        <div class="block">
+                        {/* <div class="block">
                             <a href="#" class="shadow btn custom-btn ">Wishlist</a>
                         </div>
                         <div class="block">
                             <button class="shadow btn custom-btn">Add to cart</button>
-                        </div>
+                        </div> */}
 
                         <div class="block quantity">
                             <input type="number" class="form-control" id="cart_quantity" value="1" min="0" max="5" placeholder="Enter email" name="cart_quantity"/>
@@ -414,7 +347,7 @@ export default function ProductDetail() {
                         <i class="fa-brands fa-rocketchat questions-icon"></i>
                     </div>
                     <div class="col-md-11 text">
-                        Have a question about our products at E-Store? Feel free to contact our representatives via live chat or email.
+                        Have a question about our products at E-Store? Feel free to contact our representatives via  email.
                     </div>
                 </div>
 
@@ -436,33 +369,106 @@ export default function ProductDetail() {
 
     <div class="container similar-products my-4">
                
-              <div>jjj 
-               <h1>fffffff</h1> : 
-               <h3>yes</h3>
-                {/* {selectedFeedbackDetail.length} */}
-              </div>
-               {console.log(selectedFeedbackDetail,"Selected Feedback Detail")}
-               {selectedFeedbackDetail > 0 ? (
-             <h1>{selectedFeedbackDetail.id}yes111</h1>
-            ) :  <h1>{selectedFeedbackDetail.id}yes222</h1>} 
-               {/* {selectedFeedbackDetail.length ? (
+              <div>
+              <p class="display-5"> Products Reviews</p>
 
-                selectedFeedbackDetail.map((FeedbackDetaillist) => (
-
-                        <h1>{FeedbackDetaillist}</h1>
-                    )
-
-               ) : (
-                <div>
-                 <h1>Loading... ?</h1>
+               
+            {/* {selectedFeedbackDetail.length = "" ? (
+              selectedFeedbackDetail.map((productitemlist) => (
+                <div className="card col-3 ">
+                                  <h1>khdkjf</h1>
+                  </div>
+             
+              ))
+            ) : (
+              <div>
+                <div id="spinner" class="container">
+                  <div class="loading"></div>
                 </div>
-              )} */}
+              </div>
+            )} */}
+              </div>
+               {console.log(feedbackDetail.length,"Selected Feedback Detail111111111111111111111111111")}
+          
+                  <div>
+                  {feedbackDetail.length ? (
+              feedbackDetail.map((productitemlist) => (
 
+                <div>
+
+            
+              <div class="card mb-4 mt-2">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-user-circle " style={{fontSize:"32px"}}></i> {productitemlist.usernamefeedback}</h5>
+          <p class="card-text">{productitemlist.feedback}</p>
+          
+          
+          <div className="rows">
+
+<h1 class="heading"></h1>
+<div class="rate">
+
+    <label style={{color: selected1 >= 1 ? 'gold':''}} for="star5" title="text">5 stars</label>
+
+    <label style={{color: selected1 >= 2 ? 'gold':''}} for="star4" title="text">4 stars</label>
+
+    <label style={{color: selected1 >= 3 ? 'gold':''}} for="star3" title="text">3 stars</label>
+   
+    <label style={{color: selected1 >= 4 ? 'gold':''}} for="star2" title="text">2 stars</label>
+
+    <label style={{color: selected1 >= 5 ? 'gold':''}} for="star1" title="text">1 star</label>
+</div>
 
     </div>
-    <div class="container similar-products my-4">
+          <hr/>
+
+
+          <ul class="card-text list-inline">
+            {/* <!-- Like --> */}
+            <li class="list-inline-item">
+             
+              <i class="fa-solid fa-thumbs-down"></i> 88
+        
+            </li>
+            {/* <!-- Dislike --> */}
+            <li class="list-inline-item">
+            
+              <i class="fa-solid fa-thumbs-up"></i> 14
+             
+            </li>
+            {/* <!-- Report --> */}
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="bi bi-flag"></i>
+              </a>
+            </li>
+          </ul>
+
+
+        
+        </div>
+      </div>
+                </div>
+              
+              ))
+            ) : (
+              <div>
+                <div id="spinner" class="container">
+                  <div class="loading"></div>
+                </div>
+              </div>
+            )}
+                  </div>
+             
+
+
+           
+
+ {/*
+    </div>
+      <div class="container similar-products my-4">
         {/* <hr> */}
-        <p class="display-5">Similar Products</p>
+        <p class="display-5 mt-5">Give feedback</p>
 
         {/* <div class="row">
             
@@ -498,7 +504,118 @@ export default function ProductDetail() {
         </div> */}
     </div>
 
+            {/* -----------------fEEDBACK FoRM------------- */}
 
+            <>
+            {/* <div>
+                <h1>1{userid?userid :""}   </h1>
+                <h1>2{userfeedback?userfeedback :""}</h1>
+                <h1>3{userratings?userratings :""}</h1>
+                <h1>4{feedbackDatetime?feedbackDatetime :""}</h1>
+            </div> */}
+
+            </>
+            <form class="container">
+                <div className="rows">
+                <div class="form-outline mb-4"><label class="form-label">Your Email</label>
+                <input type="email" name="email" class="form-control form-control-lg"
+                 value={usernamefeedback}
+                 onChange={(e) => handleInputChange(e, "productfeedbackNameUser")}
+                />
+
+                </div>
+                </div>
+                <div className="rows">
+
+            {/* <h1 class="heading">Give feedback</h1> */}
+            {/* <div class="rate">
+                <input type="radio" id="star5"  onChange={(e) => handleInputChange(e, "rate")} name="rate" value="5" />
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="4" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="2" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="1" />
+                <label for="star1" title="text">1 star</label>
+            </div> */}
+
+                </div>
+            
+            <div>
+                ..
+            </div>
+            <div>
+                ...
+            </div>
+
+            {/* <p class="para">What do you think of the issue with this pr?</p> */}
+
+            {/* <div class="feedback-level">
+                <div class="level">
+                <i class="lar la-sad-tear"></i>
+                </div>
+                <div class="level">
+                <i class="las la-frown"></i>
+                </div>
+                <div class="level">
+                <i class="lar la-meh"></i>
+                </div>
+                <div class="level">
+                <i class="lar la-smile"></i>
+                </div>
+                <div class="level">
+                <i class="lar la-grin"></i>
+                </div>
+            </div> */}
+
+
+            <div className="float-clears">
+
+            </div>
+
+            <div class="feedback-msg">
+                <p class="para">
+                What are the main reasons for your rating?
+                </p>
+                {userfeedback}
+                <textarea     
+                type="text"
+                name="productfeedback"
+                className="form-control form-control-lg"
+                value={userfeedback}
+                onChange={(e) => handleInputChange(e, "productfeedback")}
+                ></textarea>
+            </div>
+
+            <div className="rows">
+
+<h1 class="heading">Give feedback</h1>
+<div class="rate">
+    <h1>dledm</h1>
+    <input type="radio" id="star5"  onChange={(e) => handleInputChange(e, "rate")} name="rate" value="5" />
+    <label for="star5" title="text">5 stars</label>
+    <input type="radio" id="star4" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="4" />
+    <label for="star4" title="text">4 stars</label>
+    <input type="radio" id="star3" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="3" />
+    <label for="star3" title="text">3 stars</label>
+    <input type="radio" id="star2" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="2" />
+    <label for="star2" title="text">2 stars</label>
+    <input type="radio" id="star1" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="1" />
+    <label for="star1" title="text">1 star</label>
+</div>
+
+    </div>
+
+            <div class="buttons">
+                <a href="javascript:alert('Thanks for submiting your feedback')" 
+                className='btn btn-primary mt-3 text-white'
+                onClick={handleSubmit}>Submit</a>
+
+            </div>
+            </form>
+            {/* -----------------fEEDBACK FoRM------------- */}
 
 
     </>

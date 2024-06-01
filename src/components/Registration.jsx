@@ -303,11 +303,13 @@ const Registration = () => {
                         <div className="form-outline mb-4">
                           <label className="form-label">Your Role</label>
                           <select class="form-select" 
-                           onChange={(e) => handleInputChange(e, "user_role")}       name="user_role"   aria-label="Default select example">
+                           onChange={(e) => handleInputChange(e, "user_role")}     
+                             name="user_role" 
+                             aria-label="Default select example">
                             <option   selected>Open this select you role</option>
-                            <option value="1">Customer/Buyer </option>
+                            <option value="1">Buyer </option>
                             <option value="2">Seller</option>
-                            <option value="3">Admin</option>
+                            {/* <option value="3">Admin</option> */}
                           </select>
                         </div>
                         <div className="form-outline mb-4">

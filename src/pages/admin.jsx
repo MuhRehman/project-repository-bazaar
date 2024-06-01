@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Contacting from '../components/Contacting';
-
 
 
 
@@ -12,7 +11,118 @@ const Home = () => (
   </div>
 );
 
-export default function admin() {
+export default function Admin() {
+
+  const [userNameResult, setuserNameResult] = useState([]);
+  const [userName, setuserName] = useState(null);
+  const [userStatus, setUserStatus] = useState();
+  const [error, setError] = useState("");
+  const [msg, setMsg] = useState("");
+  const [ spinner, setSpinner ] = useState(false);
+
+
+  useEffect(() => {
+    setTimeout(function(){
+        setMsg("");
+    }, 15000);
+}, [msg]);
+
+
+
+  const handleInputChange = (e, type) => {
+      
+    switch(type){
+     
+        case "userstatus":
+        
+           setUserStatus(e.target.value);
+        
+            break;
+     
+        default:
+    }
+
+
+
+}
+ function handleSubmits(){
+            //  alert("sdsdsd");
+     console.log("userStatus  -- - - - - - -",userStatus);
+      setSpinner(true);
+      
+      if(userStatus !== "" ){
+            
+            var url = "http://localhost/backend/mailer/userstatusupdate.php";
+        
+            var headers = {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            };
+
+            var Data = {
+                userId: userStatus,
+            }
+            
+            console.log('Status data',Data);
+    
+
+            fetch(url, {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(Data)
+            })
+            // .then((response) => response.json()) 
+            .then((response) =>  {
+                setSpinner(false);
+                alert("Successfully Risgistration Apporoved..");
+               
+
+                console.log("response: ------------", response);
+                console.log("response: -----1111-", response[0].result);
+
+
+                setMsg(response[0].result);
+            }).catch((err) =>{
+              setSpinner(false);
+              alert("Failed Apporoved...");
+            //   debugger
+            setSpinner(false);
+                // setError(err);
+                console.log(err);
+            });
+
+
+            
+            // setUser("");
+           
+
+         
+
+        }
+        else{
+            setError("All fields are required!");
+        }
+    }
+
+  useEffect(() => {
+   
+    fetch("http://localhost/backend/userdata.php")
+      .then((data) => data.json())
+      .then((data) => {
+
+
+      console.log("Admin",data[0]);
+
+        setuserName(data[0]);
+        setuserNameResult(data[0]);
+   
+        
+      });
+
+  }, []);
+  
+
+
 
 
 
@@ -31,7 +141,7 @@ export default function admin() {
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-              Users Management 1
+              Users Management 
             </a>
           </li>
           </Link>
@@ -40,7 +150,7 @@ export default function admin() {
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-              Feedback
+              Add Product
             </a>
           </li>
           </Link>
@@ -86,7 +196,7 @@ export default function admin() {
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Saved reports</span>
+          <span>Admin Panel</span>
           <a class="link-secondary" href="#" aria-label="Add a new report">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
           </a>
@@ -122,7 +232,7 @@ export default function admin() {
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
+        <h1 class="h2">Users Management </h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -135,28 +245,51 @@ export default function admin() {
         </div>
       </div>
 
-      <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="1522" height="642" style={{display: "block", height: "514px", width: "1218px",}}></canvas>
-
-      <h2>Section title</h2>
+  
+      <h2>Section title { userNameResult.length }</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
+              <th scope="col">Email</th>
+              <th scope="col">Name</th>
+              <th scope="col">Password</th>
+              <th scope="col">Role Id</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
+
+      {     console.log("--------------------1userNameResult", userNameResult)}
+          { userNameResult.length }ddd
+          {userNameResult.length ? (
+               userNameResult.map((productitemlist) => (
+               
+              <tr>
+              <td>{productitemlist.id}</td>
+              <td>{productitemlist.email}</td>
+              <td>{productitemlist.name}</td>
+              <td>{productitemlist.password}</td>
+              <td>{productitemlist.roleid}</td>
+              <td>
+                <select name=""   onChange={(e) => handleInputChange(e, "userstatus")}   >
+                     <option value="2">{productitemlist.statusid} </option>
+                     <option value={productitemlist.id} >Approved {productitemlist.id}</option>
+                  </select>
+
+                  <button onClick={handleSubmits}   >Apply</button>
+              </td>
             </tr>
+              ))
+            ) : (
+              <div>
+                <div id="spinner" class="container">
+                  <div class="loading">ddd</div>
+                </div>
+              </div>
+            )}
+           
             <tr>
               <td>1,002</td>
               <td>placeholder</td>

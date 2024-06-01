@@ -73,18 +73,18 @@ export default function Searchproduct() {
   // const [productlist, setproductlist] = useState("");
   
 
-     console.log("productsSearchResult", productsSearchResult);
+    //  console.log("productsSearchResult", productsSearchResult);
   useEffect(() => {
     // setproductlist(data1);
     // alert("ddd");
-    console.log(products1);
+    // console.log(products1);
     getUsers(userList);
 
     fetch("http://localhost/backend/productdata.php")
       .then((data) => data.json())
       .then((data) => {
         // alert("Fatch call..");
-        // console.log(data[0]);
+        // console.log("userdata--------------------------------------",data[0]);
         setproductsItem(data[0]);
         setproductsSearchResult(data[0]);
         
@@ -125,8 +125,8 @@ export default function Searchproduct() {
     } else return user;
   };
   const bySearch = (user, search) => {
-     console.log('User Data',user);
-     console.log('Search Data',search);
+    //  console.log('User Data',user);
+    //  console.log('Search Data',search);
 
     if (search) {
       return user.name.toLowerCase().includes(search.toLowerCase());
@@ -233,6 +233,8 @@ export default function Searchproduct() {
                     />
                    {/* <p> {productitemlist.pimg}</p> */}
                    <div className="card-body">
+
+                    <h3>Name : <span>{productitemlist.id}</span></h3>
                     <h3>Name : <span>{productitemlist.pname}</span></h3>
                     <p> Brand : <span>{productitemlist.pmname}</span></p>
                     <p> Price :<span>{productitemlist.pprice}</span></p>

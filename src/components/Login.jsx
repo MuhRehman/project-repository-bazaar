@@ -62,7 +62,7 @@ export default function Login() {
             .then((res) => res.json())
             .then((res) => {
               // console.log( JSON.stringify(data, null, 2));
-              alert("post");
+              // alert("post");
                 //  console.log(data);
                    console.log('Testing ',res[0]);
                    console.log('res ',res[0].result[2]);

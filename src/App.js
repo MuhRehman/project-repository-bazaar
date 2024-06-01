@@ -2,7 +2,7 @@ import Registration from "./components/Registration.jsx";
 import "./App.css";
 import Login from "./components/Login.jsx";
 import ProductInfo from "./pages/ProductInfo.jsx";
-import Admin from "./pages/admin.jsx";
+import Admin from "./pages/Admin.jsx";
 import Searchproduct from "./pages/Searchproduct.jsx";
 import Contacting from "./components/Contacting.jsx";
 import ShoppingCart from "./pages/ShoppingCart.jsx";
@@ -17,6 +17,7 @@ import { useState, useEffect, useRef } from "react";
 import ShopCart from "./components/ShopCart.jsx";
 // import Checkout from "./pages/Checkout.jsx";
 import Seller from "./pages/Seller.jsx";
+import Sellers from "./pages/Sellers.jsx";
 import Feedbackdashboard from "./pages/Feedbackdashboard.jsx";
 import UsersManagement from "./pages/UsersManagement.jsx";
 
@@ -43,7 +44,7 @@ function App() {
   let readrole = localStorage.getItem("roles");
   // let readrole1 = localStorage.getItem('roles')=== "3"?  alert("admin") : alert("Not ");
 
-  console.log("role role ", readrole);
+  // console.log("role role ", readrole);
   let Username1 = localStorage.getItem("items");
   // alert(readrole);
   // alert(Username1);
@@ -129,8 +130,8 @@ function App() {
     cart: [],
   });
 
-  console.log("productsSearchResult", productsSearchResult);
-  console.log("data", data);
+  // console.log("productsSearchResult", productsSearchResult);
+  // console.log("data", data);
 
   const addToCart = (book) => {
     setState({
@@ -186,7 +187,7 @@ function App() {
     (total, book) => (total = total + book.count),
     0
   );
-  console.log("state.cart", state.cart);
+  // console.log("state.cart", state.cart);
   // ---------------shopping-cart-------------
 
   const productData = [
@@ -299,7 +300,7 @@ function App() {
 
   let Username = localStorage.getItem("items");
 
-  console.log("Login main local storage ", Username);
+  // console.log("Login main local storage ", Username);
 
    
   // -------------------Cart--
@@ -376,21 +377,31 @@ function App() {
                   Home
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/shoppingcart" className="fw-bolder">
                   shoppingcart
                 </Link>
-              </li>
+              </li> */}
+                  <li>
+                  <Link to="/admin" className="fw-bolder">
+                    Admin
+                  </Link>
+                </li>
               <li>
                 <Link to="/checkout" className="fw-bolder">
                 checkout
                 </Link>
               </li>
               <li>
-                <Link to="/seller" className="fw-bolder">
+                <Link to="/sellers" className="fw-bolder">
                 Seller Panel
                 </Link>
               </li>
+              {/* <li>
+                <Link to="/seller" className="fw-bolder">
+                Seller Panel
+                </Link>
+              </li> */}
               {readrole == '"3"' ? (
                 <li>
                   <Link to="/admin" className="fw-bolder">
@@ -694,6 +705,7 @@ function App() {
               <Route path="/shoppingcart" element={<ShoppingCart />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/seller" element={<Seller />} />
+              <Route path="/sellers" element={<Sellers />} />
               <Route path="/feedbackdashboard" element={<Feedbackdashboard />} />
               <Route path="/usersmanagement" element={<UsersManagement />} />
               {/* <Route path="/checkout" element={<Checkout    checkoutdata={state.cart}/>} /> */}
