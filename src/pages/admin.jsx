@@ -47,11 +47,12 @@ export default function Admin() {
 }
  function handleSubmits(){
             //  alert("sdsdsd");
-     console.log("userStatus  -- - - - - - -",userStatus);
+     console.log("userStatus  -- - - - - - -111",userStatus);
       setSpinner(true);
       
       if(userStatus !== "" ){
-            
+        console.log("--------------222------",userStatus);
+        alert("sdsd");
             var url = "http://localhost/backend/mailer/userstatusupdate.php";
         
             var headers = {
@@ -60,10 +61,10 @@ export default function Admin() {
             };
 
             var Data = {
-                userId: userStatus,
+              userStatus: userStatus,
             }
             
-            console.log('Status data',Data);
+            console.log('Status data121212',Data);
     
 
             fetch(url, {
@@ -71,7 +72,7 @@ export default function Admin() {
                 headers: headers,
                 body: JSON.stringify(Data)
             })
-            // .then((response) => response.json()) 
+            .then((response) => response.json()) 
             .then((response) =>  {
                 setSpinner(false);
                 alert("Successfully Risgistration Apporoved..");
@@ -262,7 +263,7 @@ export default function Admin() {
           <tbody>
 
       {     console.log("--------------------1userNameResult", userNameResult)}
-          { userNameResult.length }ddd
+          {/* { userNameResult.length }ddd */}
           {userNameResult.length ? (
                userNameResult.map((productitemlist) => (
                
@@ -290,111 +291,7 @@ export default function Admin() {
               </div>
             )}
            
-            <tr>
-              <td>1,002</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>information</td>
-              <td>placeholder</td>
-              <td>illustrative</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,004</td>
-              <td>text</td>
-              <td>random</td>
-              <td>layout</td>
-              <td>dashboard</td>
-            </tr>
-            <tr>
-              <td>1,005</td>
-              <td>dashboard</td>
-              <td>irrelevant</td>
-              <td>text</td>
-              <td>placeholder</td>
-            </tr>
-            <tr>
-              <td>1,006</td>
-              <td>dashboard</td>
-              <td>illustrative</td>
-              <td>rich</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,007</td>
-              <td>placeholder</td>
-              <td>tabular</td>
-              <td>information</td>
-              <td>irrelevant</td>
-            </tr>
-            <tr>
-              <td>1,008</td>
-              <td>random</td>
-              <td>data</td>
-              <td>placeholder</td>
-              <td>text</td>
-            </tr>
-            <tr>
-              <td>1,009</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-            <tr>
-              <td>1,010</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-            <tr>
-              <td>1,011</td>
-              <td>information</td>
-              <td>placeholder</td>
-              <td>illustrative</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,012</td>
-              <td>text</td>
-              <td>placeholder</td>
-              <td>layout</td>
-              <td>dashboard</td>
-            </tr>
-            <tr>
-              <td>1,013</td>
-              <td>dashboard</td>
-              <td>irrelevant</td>
-              <td>text</td>
-              <td>visual</td>
-            </tr>
-            <tr>
-              <td>1,014</td>
-              <td>dashboard</td>
-              <td>illustrative</td>
-              <td>rich</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,015</td>
-              <td>random</td>
-              <td>tabular</td>
-              <td>information</td>
-              <td>text</td>
-            </tr>
+            
           </tbody>
         </table>
       </div>

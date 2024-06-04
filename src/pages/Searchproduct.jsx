@@ -216,7 +216,13 @@ export default function Searchproduct() {
 
         <div className="render-area">
           <div className="card-wrapper mt-4">
-         
+         { 
+          // let test = 12 / 10;
+          // var valueInString = "100";
+          // var num = parseFloat(valueInString);
+          // var val = num - num * 0.15;
+              // console.log(val);
+          }   
 
             {productsSearchResult.length ? (
               productsSearchResult.map((productitemlist) => (
@@ -225,7 +231,9 @@ export default function Searchproduct() {
                <Link className="btn-item auction-btn mr-2"  to={`/productdetail/${productitemlist.id}`}>
                {/* <Link className="btn-item auction-btn mr-2" to={`/productDetails/${productitemlist.id}`}> */}
 
-
+               <div class="product-discount">
+              10% Off
+            </div>
                     <img
                       className="card-img-top"
                       src={`http://localhost/backend/upload/${productitemlist.pimg}`}
@@ -234,10 +242,30 @@ export default function Searchproduct() {
                    {/* <p> {productitemlist.pimg}</p> */}
                    <div className="card-body">
 
-                    <h3>Name : <span>{productitemlist.id}</span></h3>
+                    {/* <h3>Name : <span>{productitemlist.id}</span></h3> */}
                     <h3>Name : <span>{productitemlist.pname}</span></h3>
                     <p> Brand : <span>{productitemlist.pmname}</span></p>
-                    <p> Price :<span>{productitemlist.pprice}</span></p>
+                    {/* <p> Price :<span>{productitemlist.pprice}</span></p> */}
+                    <div class="d-flex flex-wrap align-items-center py-2">
+                    Price :  
+                    <div class="old-price">
+                    {productitemlist.pprice}
+                    </div>
+                    <div class="new-price">
+                      $35.053455555
+
+                      {          
+                         100 - 100 * 0.15
+                        //   let test = 12 / 10;
+                        //   let valueI1nString = "100";
+                        //   let  num = parseFloat(valueInString);
+                        //    val = num - num * 0.15;
+                        //   console.log(val);
+                      }
+                    </div>
+
+                     </div>
+
                     <h6> Type : {productitemlist.ptype}</h6>
                     <button>Add to Cart</button>
                    </div>

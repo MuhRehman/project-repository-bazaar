@@ -93,7 +93,7 @@ const Registration = () => {
                 user: user,
                 email: user_email,
                 pass: pass2,
-                roleid: user_role
+                roleid: user_role  
             }
             
             console.log('login data',Data);

@@ -77,9 +77,20 @@ export default function Login() {
                     
                    //  if (res[0].result == "login") {
                  if (res[0].result[2] == email ) {
+
+                  console.log(res[0].result,'Login---------------');
                  setMsg(res[0].result);
-                 alert("Yes, Login Succeccfully.!")
-                 navigate("/home");
+                
+
+                 if ( res[0].result[4] == "Pending" ) {
+                  alert("Your Profile is pending on approval .!")
+                  navigate("/login");
+                 } else {
+                  alert("Yes, Login Succeccfully.!")     
+                  navigate("/home");
+                 }
+
+                 
                  } else {
                      setError(res[0].result);
                  }

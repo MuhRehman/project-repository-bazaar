@@ -391,6 +391,29 @@ color: whitesmoke;
   z-index: 99;
 }
 
+ .product-discount {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: white;
+    border-radius: 3px;
+    padding: 5px 10px;
+    box-shadow: 1px 1px 28.5px -7px #dddddd;
+    user-select: none;
+    z-index: 999;
+}
+
+.old-price {
+  text-decoration: line-through;
+  opacity: 70%;
+}
+
+.new-price {
+  padding-right: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
 /* sidebar for small screens */
 @media screen and (max-width: 767px){
   
