@@ -2,7 +2,7 @@ import Registration from "./components/Registration.jsx";
 import "./App.css";
 import Login from "./components/Login.jsx";
 import ProductInfo from "./pages/ProductInfo.jsx";
-// import Admin from "./pages/admin.jsx";
+import Admin from "./pages/Admin.jsx";
 import Searchproduct from "./pages/Searchproduct.jsx";
 import Contacting from "./components/Contacting.jsx";
 import ShoppingCart from "./pages/ShoppingCart.jsx";
@@ -338,8 +338,8 @@ function App() {
       >
         <nav class="" data-bs-theme="white" ref={dropdownRef}>
           <Router>
-            <ul className="Navbar-link   d-flex">
-              {/* <ul className="Navbar-link bg-primary d-flex"> */}
+            {/* <ul className="Navbar-link   d-flex"> */}
+              <ul className="Navbar-link bg-primary d-flex">
 
               <li>
                 <Link to="/registration" className="fw-bolder">
@@ -391,7 +391,7 @@ function App() {
                 Seller Panel
                 </Link>
               </li>
-              {/* {readrole == '"3"' ? (
+              {readrole == '"3"' ? (
                 <li>
                   <Link to="/admin" className="fw-bolder">
                     Admin
@@ -399,7 +399,7 @@ function App() {
                 </li>
               ) : (
                 <p>Not Admin {readrole} </p>
-              )} */}
+              )}
 
               {/* <div className="dropdown">
     <button className="dropdown-toggle" >
@@ -692,7 +692,7 @@ function App() {
               {/* <Route path='/productdetail' element={ <ProductDetail />} /> */}
               <Route path="/home" element={<Home />} />
               <Route path="/shoppingcart" element={<ShoppingCart />} />
-              {/* <Route path="/admin" element={<Admin />} /> */}
+              <Route path="/admin" element={<Admin />} />
               <Route path="/seller" element={<Seller />} />
               <Route path="/feedbackdashboard" element={<Feedbackdashboard />} />
               <Route path="/usersmanagement" element={<UsersManagement />} />
