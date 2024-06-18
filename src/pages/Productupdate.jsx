@@ -9,7 +9,11 @@ export default function Productupdate() {
 
 
   const { id } = useParams();
+
+  
+  const [dataId, setdataId] = useState("");
   const [productName, setProductName] = useState("");
+  const [valueState, setvalueState] = useState(false);
   const [menufacturerName, setMenufacturerName] = useState("");
   const [modelName, setModelName] = useState("");
   const [productPrice, setProductPrice] = useState("");
@@ -36,7 +40,7 @@ export default function Productupdate() {
       
       // console.log("Products info",productsUpdateinfo);
       });
-
+      setdataId(id);
     // axios
     // .get('http://localhost/backend/productdata.php')
     // .then((res) => {
@@ -71,7 +75,7 @@ export default function Productupdate() {
         console.log(selectedProductInfo,"selectedProductInfo");
 
         // selectedProductInfo ? 
-        //     setSpinners(true)
+        //     setValues({...values, name})
         // : setSpinners(false);
 // -----------------------testing------------
   const [selectedFile, setSelectedFile] = useState(null);
@@ -210,6 +214,9 @@ export default function Productupdate() {
           case "productname":
             setError("");
               setProductName(e.target.value);
+              
+                setvalueState(true);
+              
               if(e.target.value === ""){
                 
                   setError("Username has left blank!");
@@ -217,6 +224,7 @@ export default function Productupdate() {
               break;
           case "menufacturername":
               setError("");
+              setvalueState(true);
               setMenufacturerName(e.target.value);
               if(e.target.value === ""){
                   setError("Email has left blank!");
@@ -224,6 +232,7 @@ export default function Productupdate() {
               break;
           case "productmodel":
               setError("");
+              setvalueState(true);
               setModelName(e.target.value);
               if(e.target.value === ""){
                   setError("Password has left blank!");
@@ -231,6 +240,8 @@ export default function Productupdate() {
               break;
           case "producttype":
               setError("");
+              setvalueState(true);
+              
               setProductType(e.target.value);
               if(e.target.value === ""){
                   setError("product type has left blank!");
@@ -238,6 +249,7 @@ export default function Productupdate() {
               break;
           case "productimage":
               setError("");
+              setvalueState(true);
               // setProductfileimage(e.target.files[0].name);
               setProductimage(e.target.files[0].name);
               // alert("Dddd--------------");
@@ -280,14 +292,16 @@ export default function Productupdate() {
         // uploading-code-------------
   
 
-    if(productName !== "" && menufacturerName !== "" && modelName !== "" && productPrice !== ""  ){
+    if(productName !== "" ){
     
-        var url = "http://localhost/backend/addproductinfo.php";
+        var url = "http://localhost/backend/updateproductinfo.php";
  
         var headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
         };
+        console.log("dataId",dataId);   
+        alert("ddd");
 
         var Data = {
 
@@ -296,12 +310,12 @@ export default function Productupdate() {
           modelName: modelName,
           productPrice: productPrice,
           productImg: productimage,
-          productType: productType
+          productType: productType,
+          dataId: dataId
 
         }
       
-
-        
+              
         // alert(Data.productName);
 
      console.log(Data.productName);
@@ -385,8 +399,11 @@ export default function Productupdate() {
                                 type="text"
                                 name="productname"
                                 className="form-control form-control-lg"
-                                value={selectedProductInfo.pname}    
+                                 
+                                value={valueState ? (productName) : (selectedProductInfo.pname)}
+                                defaultValue={selectedProductInfo.pname}
                                 onChange={(e) => handleInputChange(e, "productname")}
+                              
                               //  onBlur={checkPassword}
                             />
                         </div>
@@ -396,7 +413,8 @@ export default function Productupdate() {
                                 type="text"
                                 name="menufacturername"
                                 className="form-control form-control-lg"
-                                value={selectedProductInfo.pmname}
+                                // value={selectedProductInfo.pmname}
+                                value={valueState ? (menufacturerName) : (selectedProductInfo.pmname)}
                                 onChange={(e) => handleInputChange(e, "menufacturername")}
                                // onBlur={checkPassword}
                             />
@@ -407,7 +425,8 @@ export default function Productupdate() {
                                 type="text"
                                 name="productmodel"
                                 className="form-control form-control-lg"
-                                value={selectedProductInfo.pmodel}
+                                // value={selectedProductInfo.pmodel}
+                                value={valueState ? (modelName) : (selectedProductInfo.pmodel)}
                                 onChange={(e) => handleInputChange(e, "productmodel")}
                                // onBlur={checkPassword}
                             />
@@ -418,20 +437,22 @@ export default function Productupdate() {
                                 type="text"
                                 name="productprice"
                                 className="form-control form-control-lg"
-                                value={selectedProductInfo.pprice}
+                                value={valueState ? (productPrice) : (selectedProductInfo.pprice)}
+                                // value={selectedProductInfo.pprice}
                                 onChange={(e) => handleInputChange(e, "productprice")}
                                // onBlur={checkEmail}
                             />
                         </div>
-                      
+      
                         <div class="form-outline mb-4">
                         <label className="form-label">Product type</label>
                           <select class="form-control form-control-lg"   
                           name="producttype"
-                          value={selectedProductInfo.ptype}
+                          
+                          // value={selectedProductInfo.ptype}
                            onChange={(e) => handleInputChange(e, "producttype")}
                           >
-                            <option  value={productType}>Choose Product Type</option>
+                            <option  value={valueState ? (productType) : (selectedProductInfo.ptype)}>Choose Product Type</option>
                             <option value="movies">Movies</option>
                             <option value="games">Games</option>
                             <option value="shows">Shows</option>
@@ -439,19 +460,21 @@ export default function Productupdate() {
                             <option value="cloth">cloth</option>
                             <option value="other">Other</option>
                           </select>
+                          
                         </div>
                         <div className="form-outline mb-4">
                       
                         </div>
                         <div className="form-outline mb-4">
-                            <label className="form-label">Product Image</label>
-                          {/* <input 
+                            {/* <label className="form-label">Product Image</label> */}
+                          {/* <input  
                                 // type="file"
                                 // name="productimage"
                                 // className="form-control form-control-lg"
-                                // className="form"
+                                
                                 // ref={fileInputRef}
                                 // value={productimage}  
+                                // value={selectedProductInfo.ptype}
                                 // onChange={(e) => handleInputChange(e, "productimage")}
                               // onBlur={checkEmail}
                            />   */}
