@@ -28,10 +28,10 @@ export default function UpdateProductInfo() {
 
 
       function handleDeleteSubmits(productIds){
-                // alert("ddd");
-        console.log(productIds,"productId === ===");
-                   
-        if( productsid !== "" ){
+                alert("Delete the Record Successfully..!");
+        // console.log(productIds,"productId === ===");
+     
+        if( productIds !== "" ){
             var url = "http://localhost/backend/delete.php";
             
             var headers = {
@@ -41,7 +41,7 @@ export default function UpdateProductInfo() {
             
             var Data = {
                 
-                productid: productsid
+                productIds: productIds
             };
 
 
@@ -50,34 +50,39 @@ export default function UpdateProductInfo() {
                 headers: headers,
                 body: JSON.stringify(Data)
              })
-            .then((res) => res.json())
+            // .then((res) => res.json())
             .then((res) => {
           
-                    
+                    // alert("sss");
                    //  if (res[0].result == "login") {
                 //  if (res[0].result[2] == email ) {
 
-                //   console.log(res[0].result,'Login---------------');
+                  console.log(res[0],'Delete---1------------');
+                  console.log(res[0].result,'Delete------2---------');
+                  console.log(res[0].result[2],'Delete----3-----------');
                 //  setMsg(res[0].result);
                 
 
-             
+                    alert("Delete Record Successfully...!");
 
                  
                 //  } else {
                 //      setError(res[0].result);
                 //  }
 
-              console.log(res[0].result);
+            //   console.log(res[0].result);
             })
             .catch((error) => {
             //   setError(error);
               console.log(error)
             });
+            
 
         }
-
-
+        
+        setTimeout(() => {
+           window.location.reload(true);
+          }, 3000);
     }
 
 
@@ -219,7 +224,8 @@ export default function UpdateProductInfo() {
               <button type="button" class="btn btn-success p-1 m-1"><i class="fas fa-edit"></i></button>
               </Link>
             <button 
-             onClick={handleDeleteSubmits(productsinfos.id)}
+             onClick={() => {handleDeleteSubmits(productsinfos.id)}}
+            //  onClick={handleDeleteSubmits(productsinfos.id)}
              type="button" class="btn btn-danger p-1 m-1">
                 <i class="far fa-trash-alt"></i></button>
                 {/* <input 
