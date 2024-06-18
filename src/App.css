@@ -292,6 +292,9 @@ color: whitesmoke;
 .checkout form .input-group button:hover {
   transform: translatey(-1px);
 }
+.image-thumbnail {
+  width: 50px;
+}
   /* -----------Checkout-table--------- */
   
   /* -----------Feedback--------- */

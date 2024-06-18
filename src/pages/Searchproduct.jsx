@@ -262,7 +262,7 @@ export default function Searchproduct({ productDataObj, size }) {
                 <div className="card col-3 ">
                {/* <Link className="btn-item auction-btn mr-2" to={`/productdetail/${productitemlist.id}`}> */}
                {/* <Link className="btn-item auction-btn mr-2"  to={`/productdetail/${productitemlist.id}`}> */}
-               {/* <Link className="btn-item auction-btn mr-2" to={`/productDetails/${productitemlist.id}`}> */}
+             
 
 
                     <img
@@ -279,8 +279,10 @@ export default function Searchproduct({ productDataObj, size }) {
                     {/* <button>Add to Cart</button>
                     <button>Testing Cart Button 11</button> */}
                     <button className="btn-primary btn m-3" onClick={() => context.addToCart(productitemlist)}>Add to Cart</button>
+                      <Link className="btn-item auction-btn mr-2" to={`/productDetail/${productitemlist.id}`}>
+                    <button className="btn-primary btn m-3" onClick={() => context.addToCart(productitemlist)}>View Detail</button>
+                   </Link>
                    </div>
-                   {/* </Link> */}
                   </div>
              
               ))

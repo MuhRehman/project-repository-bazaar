@@ -19,6 +19,8 @@ import Checkout from "./pages/Checkout.jsx";
 import Seller from "./pages/Seller.jsx";
 import Feedbackdashboard from "./pages/Feedbackdashboard.jsx";
 import UsersManagement from "./pages/UsersManagement.jsx";
+import UpdateProductInfo from "./pages/UpdateProductInfo.jsx";
+import Productupdate from "./pages/Productupdate.jsx";
 
 export const BooksContext = createContext(undefined);
 
@@ -43,7 +45,7 @@ function App() {
   let readrole = localStorage.getItem("roles");
   // let readrole1 = localStorage.getItem('roles')=== "3"?  alert("admin") : alert("Not ");
 
-  console.log("role role ", readrole);
+  // console.log("role role ", readrole);
   let Username1 = localStorage.getItem("items");
   // alert(readrole);
   // alert(Username1);
@@ -129,8 +131,8 @@ function App() {
     cart: [],
   });
 
-  console.log("productsSearchResult", productsSearchResult);
-  console.log("data", data);
+  // console.log("productsSearchResult", productsSearchResult);
+  // console.log("data", data);
 
   const addToCart = (book) => {
     setState({
@@ -186,7 +188,7 @@ function App() {
     (total, book) => (total = total + book.count),
     0
   );
-  console.log("state.cart", state.cart);
+  // console.log("state.cart", state.cart);
   // ---------------shopping-cart-------------
 
   const productData = [
@@ -299,7 +301,7 @@ function App() {
 
   let Username = localStorage.getItem("items");
 
-  console.log("Login main local storage ", Username);
+  // console.log("Login main local storage ", Username);
 
    
   // -------------------Cart--
@@ -679,6 +681,7 @@ function App() {
               <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />
               <Route path="/productinfo" element={<ProductInfo />} />
+              <Route   path="/productupdate/:id" element={<Productupdate />} />
               <Route
                 path="/searchproduct"
                 element={
@@ -695,6 +698,7 @@ function App() {
               <Route path="/admin" element={<Admin />} />
               <Route path="/seller" element={<Seller />} />
               <Route path="/feedbackdashboard" element={<Feedbackdashboard />} />
+              <Route path="/updateproductinfo" element={<UpdateProductInfo />} />
               <Route path="/usersmanagement" element={<UsersManagement />} />
               <Route path="/checkout" element={<Checkout    checkoutdata={state.cart}/>} />
               {/* <Route path="/checkout" element={<Checkout />} /> */}

@@ -223,6 +223,7 @@ export default function ProductDetail() {
     // console.log("id",id);
     let selectedProduct = products.find(x=>x.id == id);
     
+    console.log("feedbackDetail----------->>>-", selectedProduct);
     console.log("feedbackDetail-----------444-", feedbackDetail);
     let selectedFeedbackDetail  = feedbackDetail.find(x=>x.userId == id);
     console.log("selectedFeedbackDetail----1wwwwww-", selectedFeedbackDetail);
@@ -243,20 +244,6 @@ export default function ProductDetail() {
 
 
         <div>
-{
-/* {
-       Object.keys(ss).map((obj, i) => {
-        return (
-            <div>
-                id is: {ss[obj].id} ;
-                name is: {ss[obj].name}
-            </div>
-        )
-    })
-} */
-}
-
-
 
 
     
