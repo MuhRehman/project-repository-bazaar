@@ -364,16 +364,16 @@ function App() {
                   Search Product
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/contacts" className="fw-bolder">
                   Contacting
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link to="/productdetail/id" className="fw-bolder">
                   Product Detail
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/home" className="fw-bolder">
                   Home

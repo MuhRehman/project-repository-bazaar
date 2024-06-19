@@ -85,16 +85,16 @@ export default function Searchproduct({ productDataObj, size }) {
     console.log("products---" , productDataObj);
     getUsers(userList);
 
-    // fetch("http://localhost/backend/productdata.php")
-    //   .then((data) => data.json())
-    //   .then((data) => {
-    //     // alert("Fatch call..");
-    //     // console.log(data[0]);
-    //     setproductsItem(data[0]);
+    fetch("http://localhost/backend/productdata.php")
+      .then((data) => data.json())
+      .then((data) => {
+        // alert("Fatch call..");
+        // console.log(data[0]);
+        setproductsItem(data[0]);
        
         
-    //     console.log("productsItem -- 1",productsSearchResult);
-    //   });
+        console.log("productsItem -- 1",productsSearchResult);
+      });
 
       setTimeout(function() { setproductsSearchResult(productDataObj) }, 1000);
 
@@ -115,9 +115,13 @@ export default function Searchproduct({ productDataObj, size }) {
 
   const handleCategory = (e) => {
     const query = e.target.value;
+    alert("dd");
     // setSearchQuery(query);
     const filteredData = productsItem.filter(item =>
+      
       item.ptype.toLowerCase().includes(query.toLowerCase())
+
+   
     );
     setproductsSearchResult(filteredData);
   };
@@ -185,34 +189,8 @@ export default function Searchproduct({ productDataObj, size }) {
 	</div> */}
 
 <div>
-      <h2>
-        {/* <span>Books1 {person}</span> */}
-        <span>Books1 {size}</span>
-        {/* <div >My Cart({totalCartCount})</div> */}
-      </h2>
-      {/* {context.state.booklist.map((book) => (
-        <div key={book.id} className="book">
-          <img src={book.image} alt={book.name} />
-          <div>
-            <h4>{book.name}</h4>
-            <p>Author: {book.author}</p>
-            <p>Price: &#8378; {book.price}</p>
-            <button onClick={() => context.addToCart(book)}>Add to Cart</button>
-          </div>
-        </div>
-      ))} */}
-      {/* <div className="book">
-        <img
-          src="https://images-na.ssl-images-amazon.com/images/I/51eqjXwFzwL._SX344_BO1,204,203,200_.jpg"
-          alt="Simyaci"
-        />
-        <div>
-          <h4>Simyaci</h4>
-          <p>Yazar: Paulo Coelho</p>
-          <p>Fiyat: &#8378; 19.99</p>
-          <button>Sepete Ekle</button>
-        </div>
-      </div> */}
+    
+      
     </div>
         <div>
           <div className="row">
@@ -276,12 +254,13 @@ export default function Searchproduct({ productDataObj, size }) {
                     <p> Brand : <span>{productitemlist.pmname}</span></p>
                     <p> Price :<span>{productitemlist.pprice}</span></p>
                     <h6>Type  : {productitemlist.ptype}</h6>
-                    {/* <button>Add to Cart</button>
-                    <button>Testing Cart Button 11</button> */}
-                    <button className="btn-primary btn m-3" onClick={() => context.addToCart(productitemlist)}>Add to Cart</button>
+                   <div className="d-flex">
+                   <button className="btn-primary btn m-1" onClick={() => context.addToCart(productitemlist)}>Add to Cart</button>
                       <Link className="btn-item auction-btn mr-2" to={`/productDetail/${productitemlist.id}`}>
-                    <button className="btn-primary btn m-3" onClick={() => context.addToCart(productitemlist)}>View Detail</button>
+                    <button className="btn-primary btn m-1" onClick={() => context.addToCart(productitemlist)}>View Detail</button>
                    </Link>
+                   </div>
+                  
                    </div>
                   </div>
              
