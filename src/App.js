@@ -21,6 +21,7 @@ import Feedbackdashboard from "./pages/Feedbackdashboard.jsx";
 import UsersManagement from "./pages/UsersManagement.jsx";
 import UpdateProductInfo from "./pages/UpdateProductInfo.jsx";
 import Productupdate from "./pages/Productupdate.jsx";
+import Complaints from "./pages/Complaints.jsx";
 
 export const BooksContext = createContext(undefined);
 
@@ -378,11 +379,11 @@ function App() {
                   Home
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/shoppingcart" className="fw-bolder">
                   shoppingcart
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/checkout" className="fw-bolder">
                 checkout
@@ -700,6 +701,7 @@ function App() {
               <Route path="/feedbackdashboard" element={<Feedbackdashboard />} />
               <Route path="/updateproductinfo" element={<UpdateProductInfo />} />
               <Route path="/usersmanagement" element={<UsersManagement />} />
+              <Route path="/complaints" element={<Complaints />} />
               <Route path="/checkout" element={<Checkout    checkoutdata={state.cart}/>} />
               {/* <Route path="/checkout" element={<Checkout />} /> */}
               <Route

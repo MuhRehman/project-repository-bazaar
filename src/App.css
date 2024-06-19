@@ -292,6 +292,13 @@ color: whitesmoke;
 .checkout form .input-group button:hover {
   transform: translatey(-1px);
 }
+.footer-wrapepr {
+  background-color: #5A8DEE;
+}
+.nav-link svg {
+padding-bottom: 4px;
+padding-right: 4px;
+}
 .image-thumbnail {
   width: 50px;
 }

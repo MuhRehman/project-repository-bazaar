@@ -176,7 +176,7 @@ const handleUpload = async(e) => {
   
   function handleProductSubmit(){
 
-     alert("ddd");
+    //  alert("ddd");
     // uploading-code-------------
     // handleUpload();
     // handleFileChange();
@@ -218,7 +218,7 @@ if( customerName !== "" && customerEmail !== "" && customerComplaint !== ""  ){
     })
     // .then((response) => response.json())
     .then((response) => {
-        alert(" Yes, Enter Product Succeccfully.!");
+        alert(" Your Complaint Submitted Successfully .!");
         
         // debugger
 
@@ -606,7 +606,7 @@ Best quality</h6>
 
 
 
-<div class="py-5 border-1">
+<div class="py-5 border-1 footer-wrapepr">
 <div class="container">
   
 <div class="row d-flex">
@@ -621,7 +621,7 @@ Best quality</h6>
     <h2 className='mb-3'>Submit Complaint Form</h2>
   <div className='row '>
 
-  <div class="col-md-4">
+  <div class="col-md-6">
 
     <label class="d-block mb-4">
           <span class="d-block mb-2">Your name</span>
@@ -636,7 +636,7 @@ Best quality</h6>
     
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-6">
   <label class="d-block mb-4">
           <span class="d-block mb-2">Email address</span>
           <input
@@ -648,7 +648,7 @@ Best quality</h6>
           />
         </label>
   </div>
-  <div class="col-md-4">
+  {/* <div class="col-md-4">
   <label class="d-block mb-4">
           <span class="d-block mb-2">Picture</span>
           <input
@@ -659,7 +659,7 @@ Best quality</h6>
             onChange={(e) => handleInputChange(e, "productImage")}
           />
         </label>
-  </div>
+  </div> */}
   </div>
   <div className='row '>
   <div class="form-floating">
@@ -673,11 +673,11 @@ Best quality</h6>
 <div className='d-flex justify-content-center '>
 {/* <button class="btn btn-primary " style={{ width:"522px",}} onSubmit={handleProductSubmit}  type="submit">Button</button> */}
   </div>
-  <div className="d-flex justify-content-center mt-3">
+  <div className="d-flex justify-content-end mt-3">
                           <input 
                                 type="submit"
                                 defaultValue="Submit"
-                                className="btn btn-primary text-white btn-block btn-upload btn-lg gradient-custom-4 text-body"
+                                className="btn btn-info text-white btn-block btn-upload btn-lg gradient-custom-4 text-body"
                                 onClick={handleProductSubmit}
                             />
                         </div>
