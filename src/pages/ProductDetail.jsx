@@ -122,7 +122,7 @@ export default function ProductDetail() {
         // setfeedbackDatetime(); 
         if(userfeedback !== "" ){
               
-              alert("sssssssssssssssss");
+             
               var url = "http://localhost/backend/insertfeedback.php";
             
        
@@ -153,7 +153,7 @@ export default function ProductDetail() {
             .then((response) => {
                
                 // debugger
-                alert("Yes, submit...1");
+             
           
                 console.log("response: ", response);
                 // setMsg(response[0].result);
@@ -244,16 +244,31 @@ export default function ProductDetail() {
 
     //  debugger
        let selected1 = 3;
+       let selectedFeedbackDetail = [];
 
-    // console.log("Products Fatch ",products);
+    console.log("Products Fatch ",products);
     // console.log("id",id);
     let selectedProduct = products.find(x=>x.id == id);
     
-    console.log("feedbackDetail-----------1>>>-", selectedProduct);
+    // console.log("feedbackDetail-----------1>>>-", selectedProduct);
+    // console.log("feedbackDetail-----------2-", feedbackDetail);
+    console.log(" selectedProduct -----------2-",  selectedProduct );
     console.log("feedbackDetail-----------2-", feedbackDetail);
-    let selectedFeedbackDetail1  = feedbackDetail.find(xs=>xs.userId == id);
-    console.log("selectedFeedbackDetail----3111-", selectedFeedbackDetail1);
+    // let selectedFeedbackDetail = feedbackDetail.find(j=>j.userId == id);
+    // console.log("selectedFeedbackDetail-----1>>>>>>>>>>>>", selectedFeedbackDetail );
+
+    let filteredArray = [];
+
+    feedbackDetail.forEach(item => {
+        if (item.userId == id) {
+            filteredArray.push(item);
+        }
+    });
     
+
+    console.log("filteredArra----1>>>>>>>>>>>>",filteredArray);
+
+
     // ?.map(sn => (
     
     //     <li>{sn.id}</li>
@@ -377,7 +392,7 @@ export default function ProductDetail() {
     <div class="container similar-products my-4">
                
               <div>
-              <p class="display-5"> Products Reviews</p>
+              <p class="display-5"> Products Reviews {filteredArray.length}</p>
 
                
             {/* {selectedFeedbackDetail.length = "" ? (
@@ -395,16 +410,13 @@ export default function ProductDetail() {
               </div>
             )} */}
               </div>
-               {console.log(feedbackDetail.length,"Selected Feedback Detail111111111111111111111111111")}
+
           
                   <div>
 
-                    <div>
-                        <h1>{feedbackDetail.length}</h1>
-                       {/* {Object.entries(selectedFeedbackDetail1).map(([key,value],i) => <h2 key={i} value={key}>{value}</h2>) } */}
-                    </div>
-                  {feedbackDetail.length ? (
-              feedbackDetail.map((productitemlist) => (
+                   
+                  {filteredArray.length ? (
+              filteredArray.map((productitemlist) => (
 
                 <div>
 
@@ -415,22 +427,22 @@ export default function ProductDetail() {
          <h5 class="card-title m-1"><i class="fas fa-user-circle " style={{fontSize:"32px"}}></i> {productitemlist.usernamefeedback}</h5>
          <p class="card-text m-2">{productitemlist.feedbacktext}</p>
          </div>
-          
+        
           
           <div className="rows">
 
                 <h1 class="heading"></h1>
-                <div class="rate">
+                <div class="rates">
 
-                    <label style={{color: selected1 >= 1 ? 'gold':''}} for="star5" title="text">5 stars</label>
+                    <label style={{color: productitemlist.ratingstar >= 1 ? 'gold':''}} for="star5" title="text">5 stars</label>
 
-                    <label style={{color: selected1 >= 2 ? 'gold':''}} for="star4" title="text">4 stars</label>
+                    <label style={{color: productitemlist.ratingstar >= 2 ? 'gold':''}} for="star4" title="text">4 stars</label>
 
-                    <label style={{color: selected1 >= 3 ? 'gold':''}} for="star3" title="text">3 stars</label>
+                    <label style={{color: productitemlist.ratingstar >= 3 ? 'gold':''}} for="star3" title="text">3 stars</label>
                 
-                    <label style={{color: selected1 >= 4 ? 'gold':''}} for="star2" title="text">2 stars</label>
+                    <label style={{color: productitemlist.ratingstar >= 4 ? 'gold':''}} for="star2" title="text">2 stars</label>
 
-                    <label style={{color: selected1 >= 5 ? 'gold':''}} for="star1" title="text">1 star</label>
+                    <label style={{color: productitemlist.ratingstar >= 5 ? 'gold':''}} for="star1" title="text">1 star</label>
                 </div>
 
           </div>
@@ -466,8 +478,8 @@ export default function ProductDetail() {
               
               ))
             ) : (
-              <div>
-                <h1>dhjdihfodin</h1>
+              <div className='text-center border-1'>
+                <p>There is no feedback available for this product..!</p>
                 {/* <div id="spinner" class="container"> */}
                   {/* <div class="loading">1</div> */}
                 {/* </div> */}
@@ -570,7 +582,7 @@ export default function ProductDetail() {
                 <p class="para">
                 What are the main reasons for your rating?
                 </p>
-                {userfeedback}
+                {/* {userfeedback} */}
                 <textarea     
                 type="text"
                 name="productfeedback"
