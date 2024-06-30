@@ -115,7 +115,7 @@ export default function Searchproduct({ productDataObj, size }) {
 
   const handleCategory = (e) => {
     const query = e.target.value;
-    alert("dd");
+    // alert("dd");
     // setSearchQuery(query);
     const filteredData = productsItem.filter(item =>
       

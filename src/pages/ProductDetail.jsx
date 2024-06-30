@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
 import Rating from '../components/Rating';
+import { Alert } from 'bootstrap';
 
 export default function ProductDetail() {
 
@@ -102,16 +103,16 @@ export default function ProductDetail() {
    
 
       
-    function handleSubmit(){
+    function SubmitProductsFeedBack(){
 
 
-        let newDate = new Date();
+        // let newDate = new Date();
 
-        let date = newDate.getDate();
-        let month = newDate.getMonth();
+        // let date = newDate.getDate();
+        // let month = newDate.getMonth();
         // let getCurrentDateandTime = month.toLocaleString() + Date().toLocaleString();
 
-        setuserId("1");
+        // setuserId("1");
         // setrating("4");
         // setfeedbackDatetime(getCurrentDateandTime);
          
@@ -120,8 +121,8 @@ export default function ProductDetail() {
         // setSpinner(true);
         // setfeedbackDatetime(); 
         if(userfeedback !== "" ){
-            //   alert("handleSubmit");
               
+              alert("sssssssssssssssss");
               var url = "http://localhost/backend/insertfeedback.php";
             
        
@@ -130,7 +131,7 @@ export default function ProductDetail() {
                   "Content-Type": "application/json"
               };
 
-              var Data = {
+              var Data = { 
                   userid: ProductId,
                   usernamefeedback: usernamefeedback,
                   userfeedback: userfeedback,
@@ -138,31 +139,53 @@ export default function ProductDetail() {
                 //   feedbackDatetime: feedbackDatetime
               }
               
-            //   console.log(' Feedback Data ---- ',Data);
+              console.log(' Feedback Data ----------------------- ',Data);
       
   
+
+
               fetch(url, {
-                  method: "POST",
-                  headers: headers,
-                  body: JSON.stringify(Data)
-              })
-              // .then((response) => response.json())
-              .then((response) => {
-                //   setSpinner(false);
-                //   alert("Feedback Successfully");
-                //   navigate("/login");
-                  // debugger
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(Data)
+            })
+            // .then((response) => response.json())
+            .then((response) => {
+               
+                // debugger
+                alert("Yes, submit...1");
+          
+                console.log("response: ", response);
+                // setMsg(response[0].result);
+            }).catch((err) =>{
+           
+              alert("Not Insert HS");
+          
+                setError(err);
+                console.log(err);
+            });
+            //   fetch(url, {
+            //       method: "POST",
+            //       headers: headers,
+            //       body: JSON.stringify(Data)
+            //   })
+            // //   .then((response) => response.json())
+            //   .then((response) => {
+            //     //   setSpinner(false);
+            //     //   alert("Feedback Successfully Submit   ");
+            //     //   navigate("/login");
+            //       // debugger
   
-                //   console.log("Response Latest: ", response);
-                  // setMsg(response[0].result);
-              }).catch((err) =>{
-                // setSpinner(false);
-                alert("Not Insert HS");
-              //   debugger
-            //   setSpinner(false);
-                  setError(err);
-                  console.log(err);
-              });
+            //       console.log("Response Latest 1111: ", response.result[0]);
+            //       // setMsg(response[0].result);
+            //   }).catch((err) =>{
+            //     // setSpinner(false);
+            //     alert("Not Insert HS");
+            //   //   debugger
+            // //   setSpinner(false);
+            //       setError(err);
+            //       console.log(err);
+            //   });
   
   
             
@@ -173,7 +196,7 @@ export default function ProductDetail() {
               setfeedbackDatetime("");
   
               // sendEmailComfirm();
-  
+            //   alert("handleSubmit dddddddddddddddd");
           }
           else{
               setError("All fields are required!");
@@ -201,7 +224,7 @@ export default function ProductDetail() {
         .get('http://localhost/backend/feedbackdetail.php')
         .then((res) => {
         //   console.log(res,"Fatch request ID"); 
-        console.log("set feedback Detail --------------------",res.data);
+        console.log("set feedback Detail -------www-",res.data);
         setfeedbackDetail(res.data);
         })
         .catch((err) => {
@@ -209,13 +232,16 @@ export default function ProductDetail() {
         });
     }
 
-    function SubmitProductsFeedBack() {
+    // function SubmitProductsFeedBack() {
        
     // alert("SubmitProductsFeedBack");
-    setuserId("1");
-    setrating("4");
-    // setfeedbackDatetime(getCurrentDateandTime);
-        }
+    // setuserId("1");
+    // setrating("4");
+    // // setfeedbackDatetime(getCurrentDateandTime);
+
+    // }
+
+
     //  debugger
        let selected1 = 3;
 
@@ -223,10 +249,10 @@ export default function ProductDetail() {
     // console.log("id",id);
     let selectedProduct = products.find(x=>x.id == id);
     
-    console.log("feedbackDetail----------->>>-", selectedProduct);
-    console.log("feedbackDetail-----------444-", feedbackDetail);
-    let selectedFeedbackDetail  = feedbackDetail.find(x=>x.userId == id);
-    console.log("selectedFeedbackDetail----1wwwwww-", selectedFeedbackDetail);
+    console.log("feedbackDetail-----------1>>>-", selectedProduct);
+    console.log("feedbackDetail-----------2-", feedbackDetail);
+    let selectedFeedbackDetail1  = feedbackDetail.find(xs=>xs.userId == id);
+    console.log("selectedFeedbackDetail----3111-", selectedFeedbackDetail1);
     
     // ?.map(sn => (
     
@@ -256,54 +282,47 @@ export default function ProductDetail() {
             )} */}
         </div>
         <div class="container my-5">
-        <div class="row">
-
-            <div class="col-md-5">
-                <div class="main-img">
-                {/* <img class="img-fluid" src={`http://localhost/backend/upload/${selectedProduct.pimg}`} alt="ProductS" /> */}
-                    
-                    <img class="img-fluid" src="https://placehold.co/600x400" alt="ProductS" />
-                    {/* <div class="row my-3 previews">
-                        <div class="col-md-3">
-                            <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
-                        </div>
-                        <div class="col-md-3">
-                            <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
-                        </div>
-                        <div class="col-md-3">
-                            <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
-                        </div>
-                        <div class="col-md-3">
-                            <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
-                        </div>
-                    </div> */}
-                </div>
-            </div>
+     
             {selectedProduct? 
+               <div class="row">
+
+               <div class="col-md-5">
+                   <div class="main-img">
+                   <img class="img-fluid img-perview" src={`http://localhost/backend/upload/${selectedProduct.pimg}`} alt="ProductS" />
+                       
+                       {/* <img class="img-fluid" src="https://placehold.co/600x400" alt="ProductS" /> */}
+                       {/* <div class="row my-3 previews">
+                           <div class="col-md-3">
+                               <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
+                           </div>
+                           <div class="col-md-3">
+                               <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
+                           </div>
+                           <div class="col-md-3">
+                               <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
+                           </div>
+                           <div class="col-md-3">
+                               <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
+                           </div>
+                       </div> */}
+                   </div>
+               </div>
             <div class="col-md-7">
                 <div class="main-description px-2">
+                     <h2>   Product Name:  {selectedProduct.pname}</h2>
+                    <h4 class="category text-bold">
+                        Category:  {selectedProduct.ptype}
+                    </h4>
                    
-                    <div class="category text-bold">
-                        Category:  {selectedProduct.pmname}
-                    </div>
-                   
-                    {/* <h1>{productId}</h1>  */}
-                    {/* <h1> Item ID: {id}</h1> */}
-                    {/* <pre>params: {JSON.stringify(paramsId)}</pre> */}
-                    <pre>params: {}</pre>
+                
+                    {/* <pre>Price : {selectedProduct.pprice }</pre> */}
 
-                    <div class="product-title text-bold my-3">
-                    {selectedProduct.pname}
+                    <div class="product-title text-bold mt-4 my-3">
+                    Price : {selectedProduct.pprice }
                     </div>
 
 
-                    <div class="price-area my-4">
-                        {/* <p class="old-price mb-1"><del>{selectedProduct.pmodel}</del> <span class="old-price-discount text-danger">(20% off)</span></p> */}
-                        {/* <p class="old-price mb-1">{selectedProduct.pmodel}</del></p> */}
-                        <p class="new-price text-bold mb-1"><strong>Modal</strong>:  {selectedProduct.pmodel}</p>
-                        {/* <p class="text-secondary mb-1">(Additional tax may apply on checkout) </p> */}
-
-                    </div>
+                  
 
 
                     <div class="buttons d-flex my-5">
@@ -314,9 +333,9 @@ export default function ProductDetail() {
                             <button class="shadow btn custom-btn">Add to cart</button>
                         </div> */}
 
-                        <div class="block quantity">
+                        {/* <div class="block quantity">
                             <input type="number" class="form-control" id="cart_quantity" value="1" min="0" max="5" placeholder="Enter email" name="cart_quantity"/>
-                        </div>
+                        </div> */}
                     </div>
 
 
@@ -326,7 +345,7 @@ export default function ProductDetail() {
 
                 <div class="product-details my-4">
                     <p class="details-title text-color mb-1">Product Details</p>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat excepturi odio recusandae aliquid ad impedit autem commodi earum voluptatem laboriosam? </p>
+                    <p class="description">he luxurious accommodations, coupled with exceptional service, made my stay truly memorable. The hotel’s prime location made exploring the city a breeze, and I can’t wait to return to. </p>
                 </div>
               
                          <div class="row questions bg-light p-3">
@@ -348,8 +367,9 @@ export default function ProductDetail() {
                 </div>
                 
             </div>
+            </div>
             :""}
-        </div>
+        
     </div>
 
 
@@ -378,6 +398,11 @@ export default function ProductDetail() {
                {console.log(feedbackDetail.length,"Selected Feedback Detail111111111111111111111111111")}
           
                   <div>
+
+                    <div>
+                        <h1>{feedbackDetail.length}</h1>
+                       {/* {Object.entries(selectedFeedbackDetail1).map(([key,value],i) => <h2 key={i} value={key}>{value}</h2>) } */}
+                    </div>
                   {feedbackDetail.length ? (
               feedbackDetail.map((productitemlist) => (
 
@@ -386,43 +411,45 @@ export default function ProductDetail() {
             
               <div class="card mb-4 mt-2">
         <div class="card-body">
-          <h5 class="card-title"><i class="fas fa-user-circle " style={{fontSize:"32px"}}></i> {productitemlist.usernamefeedback}</h5>
-          <p class="card-text">{productitemlist.feedback}</p>
+         <div className="d-flex">
+         <h5 class="card-title m-1"><i class="fas fa-user-circle " style={{fontSize:"32px"}}></i> {productitemlist.usernamefeedback}</h5>
+         <p class="card-text m-2">{productitemlist.feedbacktext}</p>
+         </div>
           
           
           <div className="rows">
 
-<h1 class="heading"></h1>
-<div class="rate">
+                <h1 class="heading"></h1>
+                <div class="rate">
 
-    <label style={{color: selected1 >= 1 ? 'gold':''}} for="star5" title="text">5 stars</label>
+                    <label style={{color: selected1 >= 1 ? 'gold':''}} for="star5" title="text">5 stars</label>
 
-    <label style={{color: selected1 >= 2 ? 'gold':''}} for="star4" title="text">4 stars</label>
+                    <label style={{color: selected1 >= 2 ? 'gold':''}} for="star4" title="text">4 stars</label>
 
-    <label style={{color: selected1 >= 3 ? 'gold':''}} for="star3" title="text">3 stars</label>
-   
-    <label style={{color: selected1 >= 4 ? 'gold':''}} for="star2" title="text">2 stars</label>
+                    <label style={{color: selected1 >= 3 ? 'gold':''}} for="star3" title="text">3 stars</label>
+                
+                    <label style={{color: selected1 >= 4 ? 'gold':''}} for="star2" title="text">2 stars</label>
 
-    <label style={{color: selected1 >= 5 ? 'gold':''}} for="star1" title="text">1 star</label>
-</div>
+                    <label style={{color: selected1 >= 5 ? 'gold':''}} for="star1" title="text">1 star</label>
+                </div>
 
-    </div>
+          </div>
           <hr/>
 
 
           <ul class="card-text list-inline">
             {/* <!-- Like --> */}
-            <li class="list-inline-item">
+            {/* <li class="list-inline-item">
              
               <i class="fa-solid fa-thumbs-down"></i> 88
         
-            </li>
+            </li> */}
             {/* <!-- Dislike --> */}
-            <li class="list-inline-item">
+            {/* <li class="list-inline-item">
             
               <i class="fa-solid fa-thumbs-up"></i> 14
              
-            </li>
+            </li> */}
             {/* <!-- Report --> */}
             <li class="list-inline-item">
               <a href="#">
@@ -440,9 +467,10 @@ export default function ProductDetail() {
               ))
             ) : (
               <div>
-                <div id="spinner" class="container">
-                  <div class="loading"></div>
-                </div>
+                <h1>dhjdihfodin</h1>
+                {/* <div id="spinner" class="container"> */}
+                  {/* <div class="loading">1</div> */}
+                {/* </div> */}
               </div>
             )}
                   </div>
@@ -530,32 +558,8 @@ export default function ProductDetail() {
 
                 </div>
             
-            <div>
-                ..
-            </div>
-            <div>
-                ...
-            </div>
+            
 
-            {/* <p class="para">What do you think of the issue with this pr?</p> */}
-
-            {/* <div class="feedback-level">
-                <div class="level">
-                <i class="lar la-sad-tear"></i>
-                </div>
-                <div class="level">
-                <i class="las la-frown"></i>
-                </div>
-                <div class="level">
-                <i class="lar la-meh"></i>
-                </div>
-                <div class="level">
-                <i class="lar la-smile"></i>
-                </div>
-                <div class="level">
-                <i class="lar la-grin"></i>
-                </div>
-            </div> */}
 
 
             <div className="float-clears">
@@ -578,27 +582,27 @@ export default function ProductDetail() {
 
             <div className="rows">
 
-<h1 class="heading">Give feedback</h1>
-<div class="rate">
-    <h1>dledm</h1>
-    <input type="radio" id="star5"  onChange={(e) => handleInputChange(e, "rate")} name="rate" value="5" />
-    <label for="star5" title="text">5 stars</label>
-    <input type="radio" id="star4" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="4" />
-    <label for="star4" title="text">4 stars</label>
-    <input type="radio" id="star3" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="3" />
-    <label for="star3" title="text">3 stars</label>
-    <input type="radio" id="star2" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="2" />
-    <label for="star2" title="text">2 stars</label>
-    <input type="radio" id="star1" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="1" />
-    <label for="star1" title="text">1 star</label>
-</div>
+            <h1 class="heading mt-4">Give Star Feedback</h1>
+                    <div class="rate mt-1 mb-5">
+                        
+                        <input type="radio" id="star5"  onChange={(e) => handleInputChange(e, "rate")} name="rate" value="5" />
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="4" />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="3" />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="2" />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="1" />
+                        <label for="star1" title="text">1 star</label>
+                    </div>
 
-    </div>
+                  </div>
 
             <div class="buttons">
                 <a href="javascript:alert('Thanks for submiting your feedback')" 
                 className='btn btn-primary mt-3 text-white'
-                onClick={handleSubmit}>Submit</a>
+                onClick={SubmitProductsFeedBack}>Submit</a>
 
             </div>
             </form>
