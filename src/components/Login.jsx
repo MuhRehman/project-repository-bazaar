@@ -83,7 +83,7 @@ export default function Login() {
                 
 
                  if ( res[0].result[4] == "Pending" ) {
-                  alert("Your Profile is pending on approval .!")
+                  alert("Your profile is still awaiting approval..!")
                   navigate("/login");
                  } else {
                   alert("Yes, Login Succeccfully.!")     
@@ -133,9 +133,10 @@ export default function Login() {
                       <p>
                           {
                               msg !== "" ?
-                              <span className="success">{msg}</span> :
+                              <span className="success">{  msg[4] = "pending" ? <span className='text-danger'>{msg[4]}</span> : "" }</span> :
                               <span className="error">{error}</span>
                           }
+                          {/* {console.log(msg);} */}
                       </p>
                     
                         <div className="form-outline mb-4">
