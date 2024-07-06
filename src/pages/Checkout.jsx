@@ -86,6 +86,8 @@ export default function Checkout(checkoutdata) {
           // debugger
           setSpinner(true);
           console.log("Response Order: ", response);
+          
+         window.location.replace("http://localhost:3000/home");
           // setMsg(response[0].result);
         })
         .catch((err) => {
@@ -295,7 +297,7 @@ export default function Checkout(checkoutdata) {
                                 </tr>
                               );
                             })
-                          : <div><h1 className="d-flex text-center">Empty</h1></div> }
+                          : <div className="empty-custom"><h1 className="d-flex text-center">Empty</h1></div> }
 
                         <div className="d-flex justify-content-end">
                           <h6 className="ml-auto">

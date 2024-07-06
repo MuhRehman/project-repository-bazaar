@@ -96,6 +96,7 @@ async function readImage(e, func) {
 }
 
 const handleUpload = async(e) => {
+  alert("upload");
   if(selectedFile)
   {
   
@@ -196,7 +197,7 @@ if( customerName !== "" && customerEmail !== "" && customerComplaint !== ""  ){
 
       customerName: customerName,
       customerEmail: customerEmail,
-      customerProductimage: customerProductimage,
+      // customerProductimage: customerProductimage,
       customerComplaint: customerComplaint,
 
 
@@ -206,9 +207,9 @@ if( customerName !== "" && customerEmail !== "" && customerComplaint !== ""  ){
     
     // alert(Data.productName);
 
-//  console.log(Data.customerName);
-//  console.log(Data.customerEmail);
-//  console.log(Data.customerComplaint);
+ console.log(Data.customerName);
+ console.log(Data.customerEmail);
+ console.log(Data.customerComplaint);
 
 
     fetch(url, {
@@ -218,14 +219,18 @@ if( customerName !== "" && customerEmail !== "" && customerComplaint !== ""  ){
     })
     // .then((response) => response.json())
     .then((response) => {
-        alert(" Your Complaint Submitted Successfully .!");
+        alert(" Your Complaint Submitted Successfully...!");
         
         // debugger
 
-        console.log("Post ".response[0].result);
-        console.log("Post psdppdppd".response[0]);
-        setMsg("Yes, Add Product succeccfully.!");
+        console.log("Post 1".response[0].result);
+        console.log("Post 1 psdppdppd".response[0]);
+        // setMsg("Yes, Add Product succeccfully.!");
+        // window.location.reload();
+
+        // window.location.replace("http://localhost:3000/home");
     }).catch((err) =>{
+      // alert("not");
         console.log("Post Error".err);
         console.log("Post Error----");
     });
@@ -264,18 +269,18 @@ else{
 <div class="ms-md-5 mt-2 mt-md-0">
 
 { Username ? <a type="button" class="btn btn-outline-primary fw-500 rounded ">
-    <i class="fa-solid fa-user me-lg-2"></i><p class="d-none d-lg-inline" style={{marginRight: '12px'}}>Logout</p>
+    <i class="fa-solid fa-user me-lg-2"></i><p class="d-none d-lg-inline" style={{marginRight: '12px'}}>Shopping </p>
   </a> : <a type="button" class="btn btn-outline-primary fw-500 rounded ">
     <i class="fa-solid fa-user me-lg-2"></i><p class="d-none d-lg-inline" style={{marginRight: '12px'}}>Sign In</p>
   </a> }
   
-  <a type="button" class="btn btn-outline-primary fw-500 rounded ml-2"  style={{marginLeft: '12px'}}>
+  {/* <a type="button" class="btn btn-outline-primary fw-500 rounded ml-2"  style={{marginLeft: '12px'}}>
     <i class="fa-solid fa-heart me-lg-2"></i><p class="d-none d-lg-inline" >Wishlist</p>
-  </a>
-  <a type="button" class="btn btn-outline-primary fw-500 rounded  ml-2" style={{marginLeft: '12px'}}>
+  </a> */}
+  {/* <a type="button" class="btn btn-outline-primary fw-500 rounded  ml-2" style={{marginLeft: '12px'}}>
     <i class="fa-solid fa-cart-shopping me-lg-2"></i><p class="d-none d-lg-inline">My Cart</p>
    
-  </a>
+  </a> */}
   </div>
 
 <ul class="dropdown-menu  dropdown-menu-start">
@@ -614,7 +619,7 @@ Best quality</h6>
   <div class="col-md-12 col-lg-3 mb-3">
  
   <img src={logos1} style={{width: '6rem'}}></img>
-  <p class="mt-4 text-muted">© 2018- 2024  <a href="https://a-rehman.com/">a-rehman.com</a>.</p>
+  <p class="mt-4 text-white">© 2018- 2024  <a style={{color: 'white'}} href="https://a-rehman.com/">a-rehman.com</a>.</p>
 
   </div>
   <div className='col-lg-9 '>
@@ -629,7 +634,7 @@ Best quality</h6>
             name="customerName"
             type="text"
             class="form-control"
-            placeholder="Joe Bloggs"
+            placeholder="Name"
             onChange={(e) => handleInputChange(e, "customerName")}
           />
         </label>
@@ -643,7 +648,7 @@ Best quality</h6>
             name="customerEmail"
             type="text"
             class="form-control"
-            placeholder="Joe Bloggs"
+            placeholder="Email"
             onChange={(e) => handleInputChange(e, "customerEmail")}
           />
         </label>

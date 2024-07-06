@@ -21,9 +21,24 @@ color: whitesmoke;
   list-style: none;
 }
 .Navbar-link {
+  margin-bottom: 0px;
   color: red;
   z-index: 999;
   position: relative;  
+}
+.btn-custom {
+  margin-left: auto;
+}
+.btn-apply {
+  margin-left: auto;
+  margin-left: 15px;
+}
+.empty-custom h1 {
+  color: red;
+}
+.empty-custom {
+  justify-items: center;
+  
 }
 .list-group  {
   margin-top: 60px;

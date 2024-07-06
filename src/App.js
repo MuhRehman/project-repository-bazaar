@@ -22,6 +22,8 @@ import UsersManagement from "./pages/UsersManagement.jsx";
 import UpdateProductInfo from "./pages/UpdateProductInfo.jsx";
 import Productupdate from "./pages/Productupdate.jsx";
 import Complaints from "./pages/Complaints.jsx";
+// import { useNavigate } from 'react-router-dom';
+
 
 export const BooksContext = createContext(undefined);
 
@@ -31,7 +33,7 @@ function App() {
 
   const [showLogout, setShowLogout] = useState(false);
   const onClick = () => setShowLogout(true);
-
+  // const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState();
   const [isOpen, setIsOpen] = useState();
   const dropdownRef = useRef(null);
@@ -131,6 +133,18 @@ function App() {
     booklist: productsSearchResult,
     cart: [],
   });
+
+
+  function handleLogout () {
+    
+    // Redirect to a different page
+    // navigate('/home');
+    localStorage.removeItem("items");
+    window.location.href = "http://localhost:3000/login";
+    // window.location = window.location.host
+
+    // useNavigate
+  }
 
   // console.log("productsSearchResult", productsSearchResult);
   // console.log("data", data);
@@ -286,7 +300,7 @@ function App() {
     }
   };
   const checkoutcart = () => {
-    if (window.confirm("Remove all items into your cart?")) {
+    if (window.confirm("You going to checkout ?")) {
       SetProducts([]);
     } else {
       // alert('No');
@@ -354,11 +368,13 @@ function App() {
                   Login
                 </Link>
               </li>
+              {readrole == '"2"' ? (
               <li>
                 <Link to="/productinfo" className="fw-bolder">
-                  Add Product Info
+                  Add Product 
                 </Link>
               </li>
+                ) : ("")}
               <li>
                 <Link to="/searchproduct" className="fw-bolder">
                   Search Product
@@ -384,24 +400,27 @@ function App() {
                   shoppingcart
                 </Link>
               </li> */}
-              <li>
+              {/* <li>
                 <Link to="/checkout" className="fw-bolder">
                 checkout
                 </Link>
-              </li>
+              </li> */}
+              {readrole == '"2"' ? (
               <li>
-                <Link to="/seller" className="fw-bolder">
+                <Link to="/updateproductinfo" className="fw-bolder">
                 Seller Panel
                 </Link>
               </li>
+                ) : ("")}
               {readrole == '"3"' ? (
                 <li>
                   <Link to="/admin" className="fw-bolder">
-                    Admin
+                    Admin Panel
                   </Link>
                 </li>
-              ) : (
-                <p>Not Admin {readrole} </p>
+              ) : (""
+                // <p>Not Admin {readrole} </p>
+                // <p>Not Admin {readrole} </p>
               )}
 
               {/* <div className="dropdown">
@@ -413,9 +432,10 @@ function App() {
               {Username ? (
                 <a
                   type="button"
-                  class="btn btn-outline-primary fw-500 rounded "
+                  class="btn btn-outline-primary fw-500 rounded btn-custom "
+                  onClick={handleLogout}
                 >
-                  <i class="fa-solid fa-user me-lg-2"></i>
+                  {/* <i class="fa-solid fa-user me-lg-2"></i> */}
                   <p
                     class="btn border border-white border-3 text-bg-light fw-bolder mt-1 "
                     style={{ marginRight: "12px" }}
@@ -428,7 +448,7 @@ function App() {
                   type="button"
                   class="btn btn-outline-primary fw-500 rounded "
                 >
-                  <i class="fa-solid fa-user me-lg-2"></i>
+                  {/* <i class="fa-solid fa-user me-lg-2"></i> */}
                   <p
                     class="btn border border-white border-3 text-bg-light fw-bolder "
                     style={{ marginRight: "12px" }}
@@ -443,13 +463,15 @@ function App() {
     </div>
   </div> */}
               <div class="avatar-group">
-                <div class="avatar">
-                  <span class="avatar-name">{Username}</span>
-                  <img
-                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                    alt="Image"
-                  />
-                </div>
+              {Username ? (
+               <div class="avatar">
+               <span class="avatar-name">{Username}</span>
+               <img
+                 src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                 alt="Image"
+               />
+             </div>
+              ):("")}
               </div>
               <div className="cart-container dropdown">
                 {/* <a type="button" className="btn  fw-500 rounded  ml-2" onClick={handleDropdownClick} > */}
@@ -552,13 +574,16 @@ function App() {
                                   </tbody>
                                 </table>
                               ) : (
-                                <table className="table cart-table mb-0">
+                             
+
+                                <div>
+   <table className="table cart-table mb-0">
                                   <thead>
                                     <tr>
-                                      <th>Action</th>
-                                      <th>Product ID</th>
-                                      <th>Name</th>
-                                      <th>Price</th>
+                                      <th scope="col">Action</th>
+                                      <th scope="col">Product ID</th>
+                                      <th scope="col">Name</th>
+                                      <th scope="col">Price</th>
                                       {/* <th>Qty</th> */}
                                       {/* <th className="text-right">
                                         <span id="amount" className="amount">
@@ -632,6 +657,13 @@ function App() {
                                       );
                                     })}
                                   </tbody>
+                                 
+                                </table>
+                                <table class="table">
+                        
+
+
+
                                   <tfoot>
                                     <tr>
                                    
@@ -643,13 +675,17 @@ function App() {
                                           {cartTotalQty}
                                         </span>
                                       </th>
-                                      <th className="text-right">
+                                      {/* <th className="text-right">
                                         Total Price
                                         <span className="ml-2 mr-2">:</span>
                                         <span className="text-danger">
                                           $ {cartTotalAmount.toFixed(0)}
                                         </span>
-                                      </th>
+                                      </th> */}
+                                         
+                                         <th colSpan="3">&nbsp;</th>
+                                            
+                                      <th colSpan="3">&nbsp;</th>
                                       <th>
                                       <Link to="/checkout" className="fw-bolder">
               
@@ -658,7 +694,7 @@ function App() {
                                           onClick={() => checkoutcart()}
                                          >
                                           <i className="fa fa-cart-shopping m-2"></i>
-                                          <span className="text-white" >Checkout 1</span>
+                                          <span className="text-white" >Checkout </span>
                                           
                                          </button>
                                          </Link>
@@ -667,7 +703,8 @@ function App() {
                                   </th>
                                     </tr>
                                   </tfoot>
-                                </table>
+                          </table>
+                                </div>
                               )}
                             </div>
                           </div>

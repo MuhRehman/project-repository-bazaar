@@ -423,9 +423,12 @@ export default function ProductDetail() {
             
               <div class="card mb-4 mt-2">
         <div class="card-body">
-         <div className="d-flex">
-         <h5 class="card-title m-1"><i class="fas fa-user-circle " style={{fontSize:"32px"}}></i> {productitemlist.usernamefeedback}</h5>
-         <p class="card-text m-2">{productitemlist.feedbacktext}</p>
+         <div className="d-flexs">
+         <h5 class="card-title m-1"><i class="fas fa-user-circle " style={{fontSize:"20px"}}></i> {productitemlist.usernamefeedback}</h5>
+
+     <div>
+     <p class="card-text m-2">{productitemlist.feedbacktext}</p>
+     </div>
          </div>
         
           
