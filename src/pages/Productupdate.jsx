@@ -28,19 +28,47 @@ export default function Productupdate() {
   const [ImagePerview, setImage] = useState("");
 
   useEffect(() => {
-    fetchProductsinfo();
+    setdataId(id);
+        axios
+    .get('http://localhost/backend/productdata.php')
+    .then((res) => {
+    //   console.log(res,"Fatch request ID"); 
+      // setProducts(res.data);
+      setProductsUpdateinfo(res.data[0]);
+      // setSpinners(false);
+       setSpinners(true)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, [])
+  
 
-    fetch("http://localhost/backend/productdata.php")
-    .then((data) => data.json())
-    .then((data) => {
+  // useEffect(() => {
+  //   alert("sss")
+  //   fetchProductsinfo();
+  //   axios
+  //   .get('http://localhost/backend/productdata.php')
+  //   .then((res) => {
+  //   //   console.log(res,"Fatch request ID"); 
+  //   setProductsUpdateinfo(res.data+"testing111");
+  //   setSpinners(true)
+    
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+    // fetch("http://localhost/backend/productdata.php")
+    // .then((data) => data.json())
+    // .then((data) => {
       // alert("Fatch call..");
-      console.log(data[0]);
+      // console.log(data[0]+"testing22");
       // setProductsUpdateinfo(data[0]);
      
       
       // console.log("Products info",productsUpdateinfo);
-      });
-      setdataId(id);
+      // });
+      // setdataId(id);
     // axios
     // .get('http://localhost/backend/productdata.php')
     // .then((res) => {
@@ -52,22 +80,22 @@ export default function Productupdate() {
     // .catch((err) => {
     //   console.log(err);
     // });
-      }, []);
+      // }, []);
 
 
       function fetchProductsinfo() {
-          // alert("test");
-            axios
-            .get('http://localhost/backend/searchproductdata.php')
-            .then((res) => {
-            //   console.log(res,"Fatch request ID"); 
-            setProductsUpdateinfo(res.data);
-            setSpinners(true)
+          alert("test");
+            // axios
+            // .get('http://localhost/backend/productdata.php')
+            // .then((res) => {
+            // //   console.log(res,"Fatch request ID"); 
+            // setProductsUpdateinfo(res.data+"testing111");
+            // setSpinners(true)
             
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+            // })
+            // .catch((err) => {
+            //   console.log(err);
+            // });
         }
 
 
@@ -301,7 +329,7 @@ export default function Productupdate() {
             "Content-Type": "application/json"
         };
         console.log("dataId",dataId);   
-        alert("ddd");
+        // alert("ddd");
 
         var Data = {
 

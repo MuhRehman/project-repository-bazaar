@@ -59,7 +59,7 @@ export default function Checkout(checkoutdata) {
     setSpinner(false);
 
     if (orderemail !== "" && orderaddress !== "") {
-      var url = "http://localhost/backend/mailer/orderconfirmcopy.php";
+      var url = "http://localhost/backend/mailer/ordermail.php";
 
       var headers = {
         Accept: "application/json",

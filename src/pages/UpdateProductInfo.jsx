@@ -218,7 +218,7 @@ export default function UpdateProductInfo() {
                       alt=""
                     /></td>
             <td>
-              <button type="button" class="btn btn-primary p-1 m-1"><i class="far fa-eye"></i></button>
+              {/* <button type="button" class="btn btn-primary p-1 m-1"><i class="far fa-eye"></i></button> */}
               {/* <Link to="/Productupdate" className="fw-bolder"> */}
               <Link to={`/Productupdate/${productsinfos.id}`} className="fw-bolder">
               <button type="button" class="btn btn-success p-1 m-1"><i class="fas fa-edit"></i></button>

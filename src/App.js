@@ -672,7 +672,9 @@ function App() {
                                         Items in Cart
                                         <span className="ml-2 mr-2">:</span>
                                         <span className="text-danger">
-                                          {cartTotalQty}
+                                        {state.cart.length > 0
+                                    ? `(${state.cart.length})`
+                                    : ""}
                                         </span>
                                       </th>
                                       {/* <th className="text-right">
